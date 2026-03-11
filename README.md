@@ -35,7 +35,14 @@ curl -fsSL https://raw.githubusercontent.com/ltgiant/cdi/master/install.sh | sh
 brew install ltgiant/tap/cdi
 ```
 
-### Windows
+### Scoop (Windows)
+
+```powershell
+scoop bucket add ltgiant https://github.com/ltgiant/scoop-bucket
+scoop install cdi
+```
+
+### Windows (manual)
 
 Download `cdi-windows-x86_64.exe` from the [latest release](https://github.com/ltgiant/cdi/releases/latest), rename to `cdi.exe`, and add to your PATH.
 
