@@ -58,26 +58,42 @@ cargo build --release
 
 ### Shell integration
 
-A subprocess cannot change the parent shell's directory, so a shell wrapper is required. Add **one line** to your shell config:
+A subprocess cannot change the parent shell's directory, so a shell wrapper is required.
 
-**Zsh** (`~/.zshrc`):
+**Zsh** — add to `~/.zshrc`:
 ```zsh
 eval "$(cdi init zsh)"
 ```
+Or run this to append automatically:
+```zsh
+echo 'eval "$(cdi init zsh)"' >> ~/.zshrc
+```
 
-**Bash** (`~/.bashrc`):
+**Bash** — add to `~/.bashrc`:
 ```bash
 eval "$(cdi init bash)"
 ```
+Or run this to append automatically:
+```bash
+echo 'eval "$(cdi init bash)"' >> ~/.bashrc
+```
 
-**Fish** (`~/.config/fish/config.fish`):
+**Fish** — add to `~/.config/fish/config.fish`:
 ```fish
 cdi init fish | source
 ```
+Or run this to append automatically:
+```fish
+echo 'cdi init fish | source' >> ~/.config/fish/config.fish
+```
 
-**PowerShell** (`$PROFILE`):
+**PowerShell** — add to `$PROFILE`:
 ```powershell
-Invoke-Expression (& cdi init powershell)
+Invoke-Expression ((& cdi.exe init powershell) -join "`n")
+```
+Or run this to append automatically:
+```powershell
+if (!(Test-Path $PROFILE)) { New-Item $PROFILE -Force | Out-Null }; Add-Content $PROFILE 'Invoke-Expression ((& cdi.exe init powershell) -join "`n")'
 ```
 
 ## Features
