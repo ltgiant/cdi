@@ -1,0 +1,15 @@
+[package]
+name = "cdi"
+version = "0.1.0"
+edition = "2024"
+description = "Quick directory navigation with numeric indices"
+license = "MIT"
+repository = "https://github.com/ltgiant/cdi"
+keywords = ["cli", "directory", "navigation", "terminal"]
+categories = ["command-line-utilities"]
+
+[dependencies]
+clap = { version = "4", features = ["derive"] }
+
+[dev-dependencies]
+tempfile = "3"
