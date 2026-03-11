@@ -37,30 +37,26 @@ The binary will be at `target/release/cdi`.
 
 ### Shell integration
 
-A subprocess cannot change the parent shell's directory, so a thin shell wrapper is required. Add the following to your shell config:
+A subprocess cannot change the parent shell's directory, so a shell wrapper is required. Add **one line** to your shell config:
 
 **Zsh** (`~/.zshrc`):
 ```zsh
-export PATH="/path/to/cdi/target/release:$PATH"
-source /path/to/cdi/shell/cdi.zsh
+eval "$(cdi init zsh)"
 ```
 
 **Bash** (`~/.bashrc`):
 ```bash
-export PATH="/path/to/cdi/target/release:$PATH"
-source /path/to/cdi/shell/cdi.bash
+eval "$(cdi init bash)"
 ```
 
 **Fish** (`~/.config/fish/config.fish`):
 ```fish
-set -gx PATH /path/to/cdi/target/release $PATH
-source /path/to/cdi/shell/cdi.fish
+cdi init fish | source
 ```
 
 **PowerShell** (`$PROFILE`):
 ```powershell
-$env:Path = "C:\path\to\cdi\target\release;" + $env:Path
-. C:\path\to\cdi\shell\cdi.ps1
+Invoke-Expression (& cdi init powershell)
 ```
 
 ## Features
