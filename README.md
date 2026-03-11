@@ -23,6 +23,22 @@ $ cdi --version
 
 ## Installation
 
+### Quick install (macOS / Linux)
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/ltgiant/cdi/master/install.sh | sh
+```
+
+### Homebrew (macOS / Linux)
+
+```bash
+brew install ltgiant/tap/cdi
+```
+
+### Windows
+
+Download `cdi-windows-x86_64.exe` from the [latest release](https://github.com/ltgiant/cdi/releases/latest), rename to `cdi.exe`, and add to your PATH.
+
 ### Build from source
 
 Requires [Rust](https://rustup.rs/).
@@ -32,8 +48,6 @@ git clone https://github.com/ltgiant/cdi.git
 cd cdi
 cargo build --release
 ```
-
-The binary will be at `target/release/cdi`.
 
 ### Shell integration
 

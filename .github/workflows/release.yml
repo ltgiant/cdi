@@ -19,6 +19,8 @@ jobs:
             os: macos-latest
           - target: x86_64-unknown-linux-gnu
             os: ubuntu-latest
+          - target: x86_64-pc-windows-msvc
+            os: windows-latest
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
@@ -31,17 +33,32 @@ jobs:
       - name: Build
         run: cargo build --release --target ${{ matrix.target }}
 
-      - name: Package
+      - name: Package (unix)
+        if: runner.os != 'Windows'
         run: |
           cd target/${{ matrix.target }}/release
           tar czf ../../../cdi-${{ matrix.target }}.tar.gz cdi
           cd ../../..
 
-      - name: Upload artifact
+      - name: Package (windows)
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          Copy-Item "target/${{ matrix.target }}/release/cdi.exe" "cdi-windows-x86_64.exe"
+
+      - name: Upload artifact (unix)
+        if: runner.os != 'Windows'
         uses: actions/upload-artifact@v4
         with:
           name: cdi-${{ matrix.target }}
           path: cdi-${{ matrix.target }}.tar.gz
+
+      - name: Upload artifact (windows)
+        if: runner.os == 'Windows'
+        uses: actions/upload-artifact@v4
+        with:
+          name: cdi-${{ matrix.target }}
+          path: cdi-windows-x86_64.exe
 
   release:
     needs: build
@@ -57,4 +74,5 @@ jobs:
             cdi-aarch64-apple-darwin/cdi-aarch64-apple-darwin.tar.gz
             cdi-x86_64-apple-darwin/cdi-x86_64-apple-darwin.tar.gz
             cdi-x86_64-unknown-linux-gnu/cdi-x86_64-unknown-linux-gnu.tar.gz
+            cdi-x86_64-pc-windows-msvc/cdi-windows-x86_64.exe
           generate_release_notes: true
